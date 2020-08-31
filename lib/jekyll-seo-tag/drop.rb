@@ -55,7 +55,9 @@ module Jekyll
       # rubocop:disable Metrics/CyclomaticComplexity
       def title
         @title ||= begin
-          if site_title && page_title != site_title
+          if page["explicit_title"]
+            page["explicit_title"]
+          elsif site_title && page_title != site_title
             page_title + TITLE_SEPARATOR + site_title
           elsif site_description && site_title
             site_title + TITLE_SEPARATOR + site_tagline_or_description
